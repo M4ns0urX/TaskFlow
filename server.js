@@ -138,7 +138,7 @@ async function start() {
   try {
     await initDatabase();
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
+      console.log(`🚀 Servidor rodando em http://20.80.106.192:${PORT}`);
     });
   } catch (err) {
     console.error('❌ Erro ao iniciar servidor:', err);
