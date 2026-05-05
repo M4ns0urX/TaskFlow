@@ -5,7 +5,7 @@
 
 ## 🏗️ Arquitetura
 ```
-[Browser Local] → [VM Azure (Node.js/Express)] → [Azure SQL Database]
+[Browser Local] → [VM Azure (Node.js/Express)] → [Azure SQL Server] → [Azure SQL Database]
 ```
 
 ---
@@ -15,8 +15,8 @@
 1. Acesse o **Portal Azure** → "Máquinas Virtuais" → **Criar**
 2. Configure:
    - **Nome**: `vm-taskflow-RM{SEU_RM}` *(substitua pelo seu RM)*
-   - **Imagem**: Ubuntu Server 22.04 LTS
-   - **Tamanho**: B1s (gratuito no plano estudante)
+   - **Imagem**: almalinux 10.1
+   - **Tamanho**: Standard DC1ds v3
    - **Autenticação**: Senha (anote login/senha)
 3. Em **Portas de entrada**: libere **SSH (22)** e **HTTP (80)**
 4. Finalize a criação e anote o **IP Público da VM**
@@ -44,9 +44,9 @@ ssh usuario@IP_DA_VM
 
 ### Instale Node.js e Git:
 ```bash
-sudo apt update && sudo apt upgrade -y
+sudo def update && sudo def upgrade -y
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs git
+sudo def install -y nodejs git
 node -v && npm -v
 ```
 
@@ -67,8 +67,7 @@ npm install
 
 ### Configure o ambiente:
 ```bash
-cp .env.example .env
-nano .env
+vi .env
 ```
 
 Edite o `.env` com os dados do seu banco Azure:
@@ -105,26 +104,6 @@ node server.js
 | Criar    | POST   | `/api/tarefas`     |
 | Atualizar| PUT    | `/api/tarefas/:id` |
 | Deletar  | DELETE | `/api/tarefas/:id` |
-
----
-
-## 🎬 Roteiro para o Vídeo
-
-1. Mostrar os **recursos criados na Azure** (VM + SQL Server com RM no nome)
-2. Mostrar a **tabela no Query Editor** com os dados
-3. Abrir o browser local com `http://IP_VM:3000`
-4. Demonstrar **INSERT** → criar nova tarefa e mostrar no banco
-5. Demonstrar **UPDATE** → editar tarefa e mostrar no banco
-6. Demonstrar **DELETE** → deletar tarefa e mostrar no banco
-
----
-
-## 🛑 PASSO FINAL — Limpar Recursos
-
-Após filmar o vídeo, **delete os grupos de recursos** para não gerar custos:
-```
-Portal Azure → Grupos de Recursos → Selecionar → Excluir
-```
 
 ---
 
